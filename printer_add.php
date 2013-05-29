@@ -3,16 +3,27 @@
 
 <?
 echo <<<EOD
-set file = "%AllUsersProfile%\Start Menu\Programs\Startup\Printer-$_GET["room_number"]-$_GET["timestamp"].vbs"
+ver | findstr "5."
+IF %ERRORLEVEL% EQU 0 set pathvar=C:\Documents and Settings\All Users\Start Menu\Programs
+
+\Startup
+
+:: Check for Windows 7
+ver | findstr "6." 
+IF %ERRORLEVEL% EQU 0 SET pathvar=C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup
+
+
+
+SET file=%pathvar%\printer-$_GET["room_number"]-$_GET["timestamp"].vbs
 
 :: The escape character for .bat files is ^
-echo strSchoolPrinter=^"\\$_GET["hostname"]\$_GET["printer_name"]^" > %file%
-echo Set objNetwork = CreateObject(^"WScript.Network^") > %file%
+echo strSchoolPrinter="""\\$_GET["hostname"]\$_GET["printer_name"]""" > %file%
+echo Set objNetwork = CreateObject("""WScript.Network""") > %file%
 echo objNetwork.AddWindowsPrinterConnection strSchoolPrinter > %file%
 echo objNetwork.SetDefaultPrinter strSchoolPrinter > %file%
 
 :: Set permissions to read/write/execute for everyone
-icacls %file% /geveryone:F
+cacls %file% /g everyone:F
 EOD;
 ?>
 </body>
