@@ -1,0 +1,29 @@
+<html>
+<body>
+<?
+// Create a connection
+$db = new mysqli("localhost", "root", "root", "rayschool");
+
+// Handle errors
+if($db->connect_errno > 0){
+    die('Unable to connect to database [' . $db->connect_error . ']');
+}
+
+echo "Connected to db!";
+
+$fields = array("host_name", "printer_name", "room_number", "description", "timestamp");
+
+$sql =<<<EOD
+INSERT INTO printers ($fields[0], $fields[1], $fields[2], $fields[3],
+       $fields[4])
+VALUES ($_GET[$fields[0]], $_GET[fields[1]], $_GET[fields[2]],
+       $_GET[$fields[3]], $_GET[fields[4]])
+EOD;
+
+// Run query
+if (!($result = $db->query($sql))){
+    die('There was an error running the query [' . $db->error . ']');
+} else {
+    echo "Completed a query!";
+}
+?>

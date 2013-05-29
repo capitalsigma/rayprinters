@@ -1,0 +1,21 @@
+<?
+// Create a connection
+$con = mysql_connect("localhost","cuipmamr4_ray", "plaintext_password?");
+if(!$con){
+	die('Could not connect: '.mysql_error());
+}
+
+// Select the appropriate database
+mysql_select_db("cuipmar4_rayschool", $con);
+
+// Display all the currenly registered printers
+$printers = mysql_query("SELECT * FROM printers");
+
+// Start displaying the printers ?>
+<h1> Currently Registered Printers </h1>
+<tr> <td> Cell 1 </td> <td> Cell 2 </td> </tr>
+
+<?
+while($row = mysql_fetch_array())
+echo "<tr> <td>" //etc
+?>
