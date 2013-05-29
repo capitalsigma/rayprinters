@@ -19,17 +19,18 @@ function write_row($arr, $keys)
 
 function generate_form_val($row, $key)
 {
-    echo "<input type = \"hidden\" id = \"$key\" value = \"$row[$key]\">";
+    echo "<input type = \"hidden\" name = \"$key\" value = \"$row[$key]\">";
 }
 
 function generate_form_vals($row, $keys, $target)
 {
     echo "<td>";
-    echo "<form action = \"$target\" method = \"get\">";
+    echo "<form name = \"submit\" action = \"$target\" method = \"get\">";
     foreach($keys as $key){
 	generate_form_val($row, $key);
     }
     echo "<input type = \"submit\" value = \"Generate\">";
+    echo "</form>";
     echo "</td>";
 }
 
