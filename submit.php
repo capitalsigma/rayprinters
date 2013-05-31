@@ -16,8 +16,8 @@ $fields = array("host_name", "printer_name", "room_number", "description", "time
 $sql =<<<EOD
 INSERT INTO printers ($fields[0], $fields[1], $fields[2], $fields[3],
        $fields[4]) 
-VALUES ($_GET[host_name], $_GET[printer_name], $_GET[room_number],
-       $_GET[description], $_GET[timestamp])
+VALUES ("$_GET[host_name]", "$_GET[printer_name]", $_GET[room_number],
+       "$_GET[description]", "$_GET[timestamp]")
 EOD;
 
 echo "<br>";

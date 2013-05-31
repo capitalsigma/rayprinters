@@ -89,6 +89,7 @@ function formTable($form_vals, $page, $method)
   foreach ($form_vals as $form_val){
     formRow($form_val);
   }
+   echo "<input type = \"hidden\" name = \"timestamp\" value = \"" . date("m-d-Y"). "\">";
   echo "<tr> <td> ";
   echo "<input type = \"submit\" value = \"Submit\">";
   echo "</form> ";
@@ -109,8 +110,8 @@ function formRow($form_val)
 $form_items = array( array("Room number", "text", "room_number"),
 		     array("Printer name", "text", "printer_name"),
 		     array("Host name", "text", "host_name"),
-		     array("Description", "text", "description"),
-		     array("", "text", "timestamp") );
+		     array("Description", "text", "description") );
+//		     array("", "text", "timestamp") );
 ?>
 
 <? formTable($form_items, "submit.php", "get"); ?>
