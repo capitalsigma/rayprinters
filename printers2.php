@@ -44,8 +44,12 @@ if($db->connect_errno > 0){
 
 echo "Connected to db!";
 
+$order = 'timestamp';
+$direction = 'DESC';
+$query = "SELECT * FROM printers ORDER BY $order $direction";
+
 // Run query
-if (!($result = $db->query("SELECT * FROM printers"))) {
+if (!($result = $db->query($query))) {
     die('There was an error running the query [' . $db->error . ']');
 } else {
     echo "Completed a query!";
@@ -89,7 +93,7 @@ function formTable($form_vals, $page, $method)
   foreach ($form_vals as $form_val){
     formRow($form_val);
   }
-   echo "<input type = \"hidden\" name = \"timestamp\" value = \"" . date("m-d-Y"). "\">";
+//   echo "<input type = \"hidden\" name = \"timestamp\" value = \"" . date("m-d-Y"). "\">";
   echo "<tr> <td> ";
   echo "<input type = \"submit\" value = \"Submit\">";
   echo "</form> ";
